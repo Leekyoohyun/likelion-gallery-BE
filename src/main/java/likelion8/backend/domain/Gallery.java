@@ -1,18 +1,17 @@
 package likelion8.backend.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
+
 import java.time.LocalDateTime;
 
 @Entity
 @Getter
 @NoArgsConstructor
+@AllArgsConstructor
 public class Gallery {
 
     /*
@@ -26,11 +25,20 @@ public class Gallery {
     @GeneratedValue(strategy = GenerationType.IDENTITY)//인스턴스 생성 때, 기본키를 자동으로 생성
     private Long id; //Integer보다 큰 범위 저장
 
-    private String image; //이미지파일 경로
+    @Lob
+    private byte[] image; //이미지파일 경로
 
     private String title;
 
     private String description;
 
     private LocalDateTime lastUpdate; //최근 수정 시간
+
+    public void update(byte[] image, String title, String description, LocalDateTime lastUpdate) {
+        this.image = image;
+        this.title = title;
+        this.description = description;
+        this.lastUpdate = lastUpdate;
+    }
+
 }
