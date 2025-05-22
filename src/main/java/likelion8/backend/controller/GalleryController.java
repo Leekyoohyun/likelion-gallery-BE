@@ -52,7 +52,7 @@ public class GalleryController {
     // PUT: /api/galleries/{galleryId}
     @PutMapping("/{galleryId}")
     public ResponseEntity<GalleryResponseDto> postGallery(
-        @RequestPart GalleryRequestDto dto,
+        @RequestBody GalleryRequestDto dto,
         @PathVariable Long galleryId
     ){
         GalleryResponseDto res = galleryService.updateGallery(dto, galleryId);
