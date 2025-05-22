@@ -68,6 +68,13 @@ public class GalleryService {
         galleryRepository.deleteById(galleryId);
     }
 
-
-
+    @Transactional
+    public GalleryResponseDto getGalleryById(Long galleryId) {
+        if (!galleryRepository.existsById(galleryId)){
+            throw new RuntimeException("그런 게시물 없음"+galleryId);
+        }
+        Gallery gallery = galleryRepository.findById(galleryId)
+                .orElseThrow(() -> new RuntimeException("해당 아이디 게시물 없음"+galleryId));
+        return new GalleryResponseDto(gallery);
+    }
 }
