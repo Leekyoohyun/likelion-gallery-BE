@@ -1,6 +1,7 @@
 package likelion8.backend.domain;
 
 import jakarta.persistence.*;
+import likelion8.backend.dto.GalleryRequestDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,7 +12,6 @@ import java.time.LocalDateTime;
 @Entity
 @Getter
 @NoArgsConstructor
-@AllArgsConstructor
 public class Gallery {
 
     /*
@@ -25,8 +25,7 @@ public class Gallery {
     @GeneratedValue(strategy = GenerationType.IDENTITY)//인스턴스 생성 때, 기본키를 자동으로 생성
     private Long id; //Integer보다 큰 범위 저장
 
-    @Lob
-    private byte[] image; //이미지파일 경로
+    private String image; //이미지파일 경로
 
     private String title;
 
@@ -34,11 +33,22 @@ public class Gallery {
 
     private LocalDateTime lastUpdate; //최근 수정 시간
 
-    public void update(byte[] image, String title, String description, LocalDateTime lastUpdate) {
+    // dto(json)를 인스턴스로 변환해주는 생성자
+    public Gallery(GalleryRequestDto dto) {
+        this.title = dto.getTitle();
+        this.description = dto.getDescription();
+        this.lastUpdate = LocalDateTime.now();
+    }
+
+    public void update(GalleryRequestDto dto) {
+        this.title = dto.getTitle();
+        this.description = dto.getDescription();
+        this.lastUpdate = LocalDateTime.now();
+    }
+
+    // Setter
+    public void setImage(String image) {
         this.image = image;
-        this.title = title;
-        this.description = description;
-        this.lastUpdate = lastUpdate;
     }
 
 }
