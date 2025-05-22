@@ -49,10 +49,10 @@ public class GalleryController {
     }
 
 
-    // PATCH: /api/galleries/{galleryId}
+    // PUT: /api/galleries/{galleryId}
     @PutMapping("/{galleryId}")
     public ResponseEntity<GalleryResponseDto> postGallery(
-        @RequestBody GalleryRequestDto dto,
+        @RequestPart GalleryRequestDto dto,
         @PathVariable Long galleryId
     ){
         GalleryResponseDto res = galleryService.updateGallery(dto, galleryId);
@@ -64,6 +64,12 @@ public class GalleryController {
     public ResponseEntity<Void> deleteGallery(@PathVariable Long galleryId) {
         galleryService.deleteGallery(galleryId);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
+
+    //GET: api/galleries/{galleryId}
+    @GetMapping("/{galleryId}")
+    public ResponseEntity<GalleryResponseDto> getGalleryById(@PathVariable Long galleryId){
+        return ResponseEntity.ok(galleryService.getGalleryById(galleryId));
     }
 
 }
