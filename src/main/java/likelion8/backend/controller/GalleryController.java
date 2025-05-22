@@ -30,10 +30,10 @@ public class GalleryController {
     }
 
     // Post: api/galleries
-    @PostMapping("/post")
+    @PostMapping
     public ResponseEntity<Void> postGallery(
-            @RequestParam("image") MultipartFile image,
-            @RequestParam("data")GalleryRequestDto data
+            @RequestPart("image") MultipartFile image,
+            @RequestPart("data") GalleryRequestDto data
     ){
         String imageUrl = "";
         try{
