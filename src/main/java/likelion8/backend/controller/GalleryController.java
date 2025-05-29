@@ -1,6 +1,5 @@
 package likelion8.backend.controller;
 
-import likelion8.backend.domain.Gallery;
 import likelion8.backend.dto.GalleryRequestDto;
 import likelion8.backend.dto.GalleryResponseDto;
 import likelion8.backend.service.GalleryService;
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
